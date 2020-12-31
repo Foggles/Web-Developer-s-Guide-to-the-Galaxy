@@ -64,12 +64,12 @@
     <div id="paremeters&Button" class="columns">
         <div class="column is-8">
             <div id="checkboxParameters">
-                <label class="checkbox">
+                <label id="imageFormat" class="checkbox">
                     <input type="checkbox">
                     Image Format
                 </label>
 
-                <label class="checkbox">
+                <label id="videoFormat" class="checkbox">
                     <input type="checkbox">
                     Video Format
                 </label>
@@ -81,13 +81,13 @@
     </div>
 
 
-    <div id="resultsContainer" class="hidden">
+    <div id="searchedResultsContainer" class="hidden">
         <div class="columns">
-        <div class="column is-12">
-            <h1>Results:</h1>
+            <div class="column is-12">
+                <h1>Results:</h1>
+            </div>
         </div>
-    </div>
-        <div id="imageResults" class="columns">
+        <div id="searchedResults" class="columns">
             <div class="column is-4">
                 <figure class="image is-480x480">
                     <img src="https://bulma.io/images/placeholders/480x480.png">

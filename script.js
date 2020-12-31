@@ -1,3 +1,12 @@
+let searchQuery = document.getElementById("searchQuery");
+let imageFormat = document.getElementById("imageFormat");
+let videoFormat = document.getElementById("videoFormat");
+let searchedResultsContainer = document.getElementById("searchedResultsContainer");
+let searchedResults = document.getElementById("searchedResults");
+
+let savedResultsContainer = document.getElementById("savedResultsContainer");
+let savedResults = document.getElementById("savedResults");
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Get all "navbar-burger" elements
