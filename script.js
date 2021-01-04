@@ -10,7 +10,7 @@ let searchedResults = document.getElementById("searchedResults");
 let savedResultsContainer = document.getElementById("savedResultsContainer");
 let savedResults = document.getElementById("savedResults");
 
-// Navbar Burger functionaliy
+// Navbar Burger functionality
 document.addEventListener('DOMContentLoaded', () => {
 
   // Get all "navbar-burger" elements
@@ -37,10 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// TODO: Search Input
-// TODO: Grab the input of searchQuery and store in its own variable.
-// TODO: Check what parameters have been selected (don't run search if none have been selected).
-// TODO: Store the results.
+// * DONE: Search Input
+// * DONE: Grab the input of searchQuery and store in its own variable.
+// * DONE: Check what parameters have been selected (don't run search if none have been selected).
+// ? TODO: Store the results. (Don't think we need to store results, thoughts?)
 // TODO: Use a "for loop" to update the DOM with the results.
 
 let querySearch;
@@ -51,52 +51,57 @@ function searchDatabase(queryURL) {
 
   console.log(querySearch);
   console.log(queryURL);
-  
+
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function (response) {
     console.log(response);
 
-    debugger
     // Displaying the search results to the DOM
     for (let index = 0; index < response.collection.items.length; index++) {
+  
       // Creating the new elements in memory
       let newImageDiv = document.createElement("div");
       let newImageFigure = document.createElement("figure");
       let newImage = document.createElement("img");
 
       // Adding CSS classes to the new div and figure
-      newImageDiv.classList.add("column is-4");
-      newImageFigure.classList.add("image is-480x480");
-      
-      // Changing the src of the new image
-      newImage.src = response.collection.items[index].href;
+      newImageDiv.classList.add("column");
+      newImageDiv.classList.add("is-one-third");
+      newImageFigure.classList.add("image");
+      newImageFigure.classList.add("is-480x480");
+
+      // Changing the src of the new image & setting an alt
+      newImageDiv.setAttribute("alt", "RESULT FAILED TO LOAD");
+      newImage.src = response.collection.items[index].links[0].href;
+      console.log(newImage.src);
 
       // Appending everything to the DOM
       newImageFigure.appendChild(newImage);
       newImageDiv.appendChild(newImageFigure);
       searchedResults.appendChild(newImageDiv);
-      
+
       // Removing the hidden class from the entire container
       searchedResultsContainer.classList.remove("hidden");
-    }
-  })
-}
+    };
+  });
+};
 
 // Adding a click event listener to the search button
-searchButton.addEventListener("click", function() { 
+searchButton.addEventListener("click", function () {
   querySearch = searchQuery.value;
   querySearch = querySearch.toLowerCase();
 
   let queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
 
-  if (imageFormat.checked === true || audioFormat.checked === true) {
-    if (imageFormat.checked === true && audioFormat.checked === true) {
+  // Changing queryMediaType depending on which parameters are checked
+  if (imageFormat.checked || audioFormat.checked) {
+    if (imageFormat.checked && audioFormat.checked) {
       queryMediaType = "&media_type=image,audio";
       searchDatabase(queryURL);
-    }  
-      else if (imageFormat.checked === true) {
+    }
+    else if (imageFormat.checked === true) {
       queryMediaType = "&media_type=image";
       searchDatabase(queryURL);
     } else if (audioFormat.checked === true) {
@@ -106,5 +111,7 @@ searchButton.addEventListener("click", function() {
   } else {
     alert("Please select at least one format type");
   }
+
+  searchedResults.innerHTML = "";
 
 });
