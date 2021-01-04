@@ -1,19 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="./style.css">
 
     <title>Document</title>
 </head>
+
 <body>
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="">
+                <img src="" alt="LOGO" width="112" height="28">
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-end">
+                <a href="./index.html" class="navbar-item">
+                    Home Page
+                </a>
+
+                <a href="./saved.html" class="navbar-item">
+                    Saved Gallery
+                </a>
+            </div>
+
+        </div>
+    </nav>
+
     <div class="columns">
-        <div class="column">1</div>
-        <div class="column">2</div>
-        <div class="column">3</div>
-        <div class="column">4</div>
-        <div class="column">5</div>
-      </div>
+        <div class="column is-12">
+            <section class="hero is-dark is-large">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">
+                            Large title
+                        </h1>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="columns">
+        <div class="column is-12">
+            <div class="control">
+                <input id="searchQuery" class="input is-dark" type="text" placeholder="Search NASA Database">
+            </div>
+        </div>
+    </div>
+
+    <div id="paremeters&Button" class="columns">
+        <div class="column is-8">
+            <div id="checkboxParameters">
+                <label class="checkbox">
+                    <input id="imageFormat" type="checkbox">
+                    Image Format
+                </label>
+
+                <label class="checkbox">
+                    <input id="audioFormat" type="checkbox">
+                    Audio Format
+                </label>
+            </div>
+        </div>
+        <div class="column is-4">
+            <button id="searchButton" class="button is-dark">Lift Off!</button>
+        </div>
+    </div>
+
+
+    <div id="searchedResultsContainer" class="hidden">
+        <div class="columns">
+            <div class="column is-12">
+                <h1>Results:</h1>
+            </div>
+        </div>
+        <div id="searchedResults" class="columns is-multiline">
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./script.js"></script>
 </body>
+
 </html>
