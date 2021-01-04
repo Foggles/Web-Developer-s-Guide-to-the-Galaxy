@@ -62,7 +62,7 @@
     </div>
 
     <div id="paremeters&Button" class="columns">
-        <div class="column is-8">
+        <div class="column is-3">
             <div id="checkboxParameters">
                 <label class="checkbox">
                     <input id="imageFormat" type="checkbox">
@@ -75,7 +75,7 @@
                 </label>
             </div>
         </div>
-        <div class="column is-4">
+        <div class="column is-1">
             <button id="searchButton" class="button is-dark">Lift Off!</button>
         </div>
     </div>
@@ -89,6 +89,20 @@
         </div>
         <div id="searchedResults" class="columns is-multiline">
         </div>
+    </div>
+
+    <div id="genericModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content is-flex-wrap-wrap">
+            <p class="image is-4by3">
+                <img id="modalImage" src="" alt="">
+            </p>
+            <div class="modal-card">
+                <section id="resultInfo" class="modal-card-body"></section>
+                <div id="saveBtn" class="button">Save Image to Saved Gallery</div>
+            </div>
+        </div>
+        <button id="modalCloseBtn" class="modal-close is-large" aria-label="close"></button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
