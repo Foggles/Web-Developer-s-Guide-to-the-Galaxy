@@ -2,7 +2,7 @@
 let searchButton = document.getElementById("searchButton");
 let searchQuery = document.getElementById("searchQuery");
 let imageFormat = document.getElementById("imageFormat");
-let videoFormat = document.getElementById("videoFormat");
+let audioFormat = document.getElementById("audioFormat");
 let searchedResultsContainer = document.getElementById("searchedResultsContainer");
 let searchedResults = document.getElementById("searchedResults");
 
@@ -63,19 +63,19 @@ function searchDatabase(queryURL) {
 // Adding a click event listener to the search button
 searchButton.addEventListener("click", function() { 
   querySearch = searchQuery.value;
-
+  querySearch = querySearch.toLowerCase();
 
   let queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
 
-  if (imageFormat.checked === true || videoFormat.checked === true) {
-    if (imageFormat.checked === true && videoFormat.checked === true) {
+  if (imageFormat.checked === true || audioFormat.checked === true) {
+    if (imageFormat.checked === true && audioFormat.checked === true) {
       queryMediaType = "&media_type=image,audio";
       searchDatabase(queryURL);
     }  
       else if (imageFormat.checked === true) {
       queryMediaType = "&media_type=image";
       searchDatabase(queryURL);
-    } else if (videoFormat.checked === true) {
+    } else if (audioFormat.checked === true) {
       queryMediaType = "&media_type=audio";
       searchDatabase(queryURL);
     }
