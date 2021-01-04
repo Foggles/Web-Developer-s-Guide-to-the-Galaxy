@@ -52,7 +52,12 @@ function searchDatabase(queryURL) {
   console.log(querySearch);
   console.log(queryURL);
   
-
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function (response) {
+    console.log(response);
+  })
 }
 
 // Adding a click event listener to the search button
@@ -64,14 +69,14 @@ searchButton.addEventListener("click", function() {
 
   if (imageFormat.checked === true || videoFormat.checked === true) {
     if (imageFormat.checked === true && videoFormat.checked === true) {
-      queryMediaType = "media_type=image,audio";
+      queryMediaType = "&media_type=image,audio";
       searchDatabase(queryURL);
     }  
       else if (imageFormat.checked === true) {
-      queryMediaType = "media_type=image";
+      queryMediaType = "&media_type=image";
       searchDatabase(queryURL);
     } else if (videoFormat.checked === true) {
-      queryMediaType = "media_type=audio";
+      queryMediaType = "&media_type=audio";
       searchDatabase(queryURL);
     }
   } else {
