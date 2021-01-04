@@ -44,19 +44,38 @@ document.addEventListener('DOMContentLoaded', () => {
 // TODO: Use a "for loop" to update the DOM with the results.
 
 let querySearch;
-
-// Adding a click event listener to the search button
-searchButton.addEventListener("click", function() { 
-  let queryURL = "https://images-api.nasa.gov/search?q=" + querySearch;
-
-  searchDatabase(queryURL)
-});
+let queryMediaType;
 
 // Function to search the NASA databse
 function searchDatabase(queryURL) {
 
-  querySearch = searchQuery.value;
   console.log(querySearch);
   console.log(queryURL);
+  
 
 }
+
+// Adding a click event listener to the search button
+searchButton.addEventListener("click", function() { 
+  querySearch = searchQuery.value;
+
+
+  let queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
+
+  if (imageFormat.checked === true || videoFormat.checked === true) {
+    if (imageFormat.checked === true && videoFormat.checked === true) {
+      queryMediaType = "media_type=image,audio";
+      searchDatabase(queryURL);
+    }  
+      else if (imageFormat.checked === true) {
+      queryMediaType = "media_type=image";
+      searchDatabase(queryURL);
+    } else if (videoFormat.checked === true) {
+      queryMediaType = "media_type=audio";
+      searchDatabase(queryURL);
+    }
+  } else {
+    alert("Please select at least one format type");
+  }
+
+});
