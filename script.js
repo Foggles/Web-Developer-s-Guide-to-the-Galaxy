@@ -11,6 +11,7 @@ let genericModal = document.getElementById("genericModal");
 let modalImage = document.getElementById("modalImage");
 let modalCloseBtn = document.getElementById("modalCloseBtn");
 let resultInfo = document.getElementById("resultInfo");
+let saveBtn = document.getElementById("saveBtn");
 
 // Grabbing elements from saved.html
 let savedResultsContainer = document.getElementById("savedResultsContainer");

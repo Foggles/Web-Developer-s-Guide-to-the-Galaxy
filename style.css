@@ -1,3 +1,7 @@
 .hidden {
     display: none;
 }
+
+.modal-content {
+    background-color: white;
+}
