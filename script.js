@@ -5,9 +5,12 @@ let imageFormat = document.getElementById("imageFormat");
 let audioFormat = document.getElementById("audioFormat");
 let searchedResultsContainer = document.getElementById("searchedResultsContainer");
 let searchedResults = document.getElementById("searchedResults");
+
+// Grabbing elements from the modal
 let genericModal = document.getElementById("genericModal");
 let modalImage = document.getElementById("modalImage");
-let modalCloseBtn = document.getElementsByTagName("modalCloseBtn");
+let modalCloseBtn = document.getElementById("modalCloseBtn");
+let resultInfo = document.getElementById("resultInfo");
 
 // Grabbing elements from saved.html
 let savedResultsContainer = document.getElementById("savedResultsContainer");
@@ -81,11 +84,8 @@ function searchDatabase(queryURL) {
       // Changing the src of the new image & setting an alt
       newImageDiv.setAttribute("alt", "RESULT FAILED TO LOAD");
       newImage.src = response.collection.items[index].links[0].href;
-      console.log(newImage.src);
-
-      // newImage.addEventListener("click", function() {
-
-      // });
+      newImage.setAttribute("description", response.collection.items[index].data[0].description);
+      newImage.setAttribute("title", response.collection.items[index].data[0].title);
 
       // Appending everything to the DOM
       newImageFigure.appendChild(newImage);
@@ -129,17 +129,28 @@ searchButton.addEventListener("click", function () {
 
 });
 
+// * DONE: When the click event is triggered, a modal appears.
+// * DONE: When user clicks the close button, the modal disappears.
+// TODO: The modal will contain the image on the left & information about the image on the right.
+// TODO: There will also be a save button in the modal, allowing the user to save the image to local storage for later viewing.
+
+// Event listener to give data to the modal and open it
 searchedResultsContainer.addEventListener("click", function (event) {
   if (event.target.matches("img")) {
     const imgSrc = event.target.getAttribute("src");
     console.log(imgSrc);
-debugger
+
     modalImage.setAttribute("src", imgSrc);
+    let imgDesc = event.target.getAttribute("description");
+    resultInfo.textContent = imgDesc;
+
     genericModal.classList.add("is-active");
   }
 });
 
-// TODO: When the click event is triggered, a modal appears.
-// TODO: The modal will contain the image on the left & information about the image on the right.
-// TODO: There will also be a save button in the modal, allowing the user to save the image to local storage for later viewing.
+// Event listener to close the modal
+modalCloseBtn.addEventListener("click", function() {
+  genericModal.classList.remove("is-active");
+});
+
 
