@@ -57,6 +57,30 @@ function searchDatabase(queryURL) {
     method: "GET"
   }).then(function (response) {
     console.log(response);
+
+    debugger
+    // Displaying the search results to the DOM
+    for (let index = 0; index < response.collection.items.length; index++) {
+      // Creating the new elements in memory
+      let newImageDiv = document.createElement("div");
+      let newImageFigure = document.createElement("figure");
+      let newImage = document.createElement("img");
+
+      // Adding CSS classes to the new div and figure
+      newImageDiv.classList.add("column is-4");
+      newImageFigure.classList.add("image is-480x480");
+      
+      // Changing the src of the new image
+      newImage.src = response.collection.items[index].href;
+
+      // Appending everything to the DOM
+      newImageFigure.appendChild(newImage);
+      newImageDiv.appendChild(newImageFigure);
+      searchedResults.appendChild(newImageDiv);
+      
+      // Removing the hidden class from the entire container
+      searchedResultsContainer.classList.remove("hidden");
+    }
   })
 }
 
