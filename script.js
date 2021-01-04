@@ -5,10 +5,15 @@ let imageFormat = document.getElementById("imageFormat");
 let audioFormat = document.getElementById("audioFormat");
 let searchedResultsContainer = document.getElementById("searchedResultsContainer");
 let searchedResults = document.getElementById("searchedResults");
+let genericModal = document.getElementById("genericModal");
+let modalImage = document.getElementById("modalImage");
+let modalCloseBtn = document.getElementsByTagName("modalCloseBtn");
 
 // Grabbing elements from saved.html
 let savedResultsContainer = document.getElementById("savedResultsContainer");
 let savedResults = document.getElementById("savedResults");
+
+imageFormat.checked = true;
 
 // Navbar Burger functionality
 document.addEventListener('DOMContentLoaded', () => {
@@ -43,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ? TODO: Store the results. (Don't think we need to store results, thoughts?)
 // TODO: Use a "for loop" to update the DOM with the results.
 
+
 let querySearch;
 let queryMediaType;
 
@@ -60,7 +66,7 @@ function searchDatabase(queryURL) {
 
     // Displaying the search results to the DOM
     for (let index = 0; index < response.collection.items.length; index++) {
-  
+
       // Creating the new elements in memory
       let newImageDiv = document.createElement("div");
       let newImageFigure = document.createElement("figure");
@@ -70,12 +76,16 @@ function searchDatabase(queryURL) {
       newImageDiv.classList.add("column");
       newImageDiv.classList.add("is-one-third");
       newImageFigure.classList.add("image");
-      newImageFigure.classList.add("is-480x480");
+      newImageFigure.classList.add("is-square");
 
       // Changing the src of the new image & setting an alt
       newImageDiv.setAttribute("alt", "RESULT FAILED TO LOAD");
       newImage.src = response.collection.items[index].links[0].href;
       console.log(newImage.src);
+
+      // newImage.addEventListener("click", function() {
+
+      // });
 
       // Appending everything to the DOM
       newImageFigure.appendChild(newImage);
@@ -93,19 +103,22 @@ searchButton.addEventListener("click", function () {
   querySearch = searchQuery.value;
   querySearch = querySearch.toLowerCase();
 
-  let queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
+  let queryURL;
 
   // Changing queryMediaType depending on which parameters are checked
   if (imageFormat.checked || audioFormat.checked) {
     if (imageFormat.checked && audioFormat.checked) {
       queryMediaType = "&media_type=image,audio";
+      queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
       searchDatabase(queryURL);
     }
     else if (imageFormat.checked === true) {
       queryMediaType = "&media_type=image";
+      queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
       searchDatabase(queryURL);
     } else if (audioFormat.checked === true) {
       queryMediaType = "&media_type=audio";
+      queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
       searchDatabase(queryURL);
     }
   } else {
@@ -115,3 +128,18 @@ searchButton.addEventListener("click", function () {
   searchedResults.innerHTML = "";
 
 });
+
+searchedResultsContainer.addEventListener("click", function (event) {
+  if (event.target.matches("img")) {
+    const imgSrc = event.target.getAttribute("src");
+    console.log(imgSrc);
+debugger
+    modalImage.setAttribute("src", imgSrc);
+    genericModal.classList.add("is-active");
+  }
+});
+
+// TODO: When the click event is triggered, a modal appears.
+// TODO: The modal will contain the image on the left & information about the image on the right.
+// TODO: There will also be a save button in the modal, allowing the user to save the image to local storage for later viewing.
+
