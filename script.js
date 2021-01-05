@@ -209,7 +209,7 @@ searchButton.addEventListener("click", function () {
 // * DONE: When the click event is triggered, a modal appears.
 // * DONE: When user clicks the close button, the modal disappears.
 // TODO: The modal will contain the image on the left & information about the image on the right.
-// TODO: There will also be a save button in the modal, allowing the user to save the image to local storage for later viewing.
+// * DONE: There will also be a save button in the modal, allowing the user to save the image to local storage for later viewing.
 
 // Event listener to give data to the modal and open it
 searchedResultsContainer.addEventListener("click", function (event) {
