@@ -56,61 +56,26 @@ function apodBanner(queryUrlApod) {
     url: queryUrlApod,
     method: "GET"
   }).then(function (response) {
-    console.log(response)
-
-    // apodImage.src = response.hdurl
 
     for (let index = 0; index < response.length; index++) {
 
-
-
       if (response[index].media_type === "video") {
-        console.log({ index })
 
-        let targetImg = document.getElementById("img" + index)
+        let targetImg = document.getElementById("img" + index);
         targetImg.classList.add('hidden');
-
-
-        // let newVideo = document.createElement("video")
-        // let newSrc = document.createElement("source")
-        // newSrc.src = response[index].url
-        // newVideo.appendChild(newSrc)
-        // img[index].classList.add("hidden")
-        let newDiv = document.getElementById("div" + index)
+        let newDiv = document.getElementById("div" + index);
 
         console.log({ newDiv });
-        // newDiv.appendChild(newVideo)
         newDiv.appendChild(createIframe(response[index].url));
       }
-
 
       let htmlImg = document.getElementById("img" + index);
       htmlImg.src = response[index].url;
 
+    };
 
-
-      // let newImage = document.createElement("img")
-
-
-
-      // newLi.setAttribute("id", "carousel_slide" + index)
-      // newLi.tabIndex = 0
-
-      // newImage.src = response[index].url
-
-      // newDiv.appendChild(newA1)
-      // newDiv.appendChild(newImage)
-      // newDiv.appendChild(newA2)
-      // newLi.appendChild(newDiv)
-      // carouselContainer.appendChild(newLi)
-
-
-
-
-    }
-
-  })
-}
+  });
+};
 
 var slideIndex = 1;
 showSlides(slideIndex);
@@ -118,28 +83,28 @@ showSlides(slideIndex);
 // Next/previous controls
 function plusSlides(n) {
   showSlides(slideIndex += n);
-}
+};
 
 // Thumbnail image controls
 function currentSlide(n) {
   showSlides(slideIndex = n);
-}
+};
 
 function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("mySlides");
   var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) { slideIndex = 1 }
-  if (n < 1) { slideIndex = slides.length }
+  if (n > slides.length) { slideIndex = 1 };
+  if (n < 1) { slideIndex = slides.length };
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
-  }
+  };
   for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
-  }
+  };
   slides[slideIndex - 1].style.display = "block";
   dots[slideIndex - 1].className += " active";
-}
+};
 
 function createIframe(src) {
 
@@ -153,7 +118,7 @@ function createIframe(src) {
   iframe.setAttribute('allowfullscreen', true);
 
   return iframe;
-}
+};
 
 apodBanner(queryUrlApod);
 
