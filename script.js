@@ -5,8 +5,6 @@ let imageFormat = document.getElementById("imageFormat");
 let audioFormat = document.getElementById("audioFormat");
 let searchedResultsContainer = document.getElementById("searchedResultsContainer");
 let searchedResults = document.getElementById("searchedResults");
-let carouselContainer = document.getElementById("carousel_container")
-
 
 // Grabbing elements from the modal
 let genericModal = document.getElementById("genericModal");
@@ -14,13 +12,6 @@ let modalImage = document.getElementById("modalImage");
 let modalCloseBtn = document.getElementById("modalCloseBtn");
 let resultInfo = document.getElementById("resultInfo");
 let saveBtn = document.getElementById("saveBtn");
-// let imgDesc = event.target.getAttribute("description");
-
-
-
-
-// let youtube = 'https://www.youtube.com/embed/E7PQbfnErEw?rel=0'
-
 
 // Grabbing elements from saved.html
 let savedResultsContainer = document.getElementById("savedResultsContainer");
@@ -166,11 +157,6 @@ function createIframe(src) {
 
 apodBanner(queryUrlApod);
 
-
-
-
-
-
 // * DONE: Search Input
 // * DONE: Grab the input of searchQuery and store in its own variable.
 // * DONE: Check what parameters have been selected (don't run search if none have been selected).
@@ -275,7 +261,9 @@ searchedResultsContainer.addEventListener("click", function (event) {
 });
 
 // Event listener to close the modal
+
 modalCloseBtn.addEventListener("click", function () {
+
   genericModal.classList.remove("is-active");
 });
 
@@ -305,3 +293,4 @@ modalCloseBtn.addEventListener("click", function () {
 // When redirected to 'Saved Images', Retrieve local storage
 
 // Append images to same format as home page
+
