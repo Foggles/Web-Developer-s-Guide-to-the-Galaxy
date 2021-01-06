@@ -189,11 +189,11 @@ searchButton.addEventListener("click", function () {
       queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
       searchDatabase(queryURL);
     }
-    else if (imageFormat.checked === true) {
+    else if (imageFormat.checked === true && audioFormat.checked != true) {
       queryMediaType = "&media_type=image";
       queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
       searchDatabase(queryURL);
-    } else if (audioFormat.checked === true) {
+    } else if (audioFormat.checked === true && audioFormat.checked != true) {
       queryMediaType = "&media_type=audio";
       queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
       searchDatabase(queryURL);
