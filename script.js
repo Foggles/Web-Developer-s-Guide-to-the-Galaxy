@@ -177,7 +177,7 @@ searchButton.addEventListener("click", function () {
       searchDatabase(queryURL);
     }
   } else {
-    alert("Please select at least one format type");
+    searchQuery.setAttribute("placeholder", "Please select a format type");
   }
   searchedResults.innerHTML = "";
 });
