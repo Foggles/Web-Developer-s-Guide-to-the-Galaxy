@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
     <link rel="stylesheet" href="./style.css">
-
-    <title>Document</title>
+    <title>Saved Gallery</title>
 </head>
-
 <body>
     <nav class="navbar is-black" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="">
-                <img src="" alt="LOGO" width="112" height="28">
-            </a>
-
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
                 data-target="navbarBasicExample">
                 <span aria-hidden="true"></span>
@@ -24,49 +17,44 @@
                 <span aria-hidden="true"></span>
             </a>
         </div>
-
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-end">
                 <a href="./index.html" class="navbar-item">
                     Home Page
                 </a>
-
                 <a href="./saved.html" class="navbar-item">
                     Saved Gallery
                 </a>
             </div>
-
         </div>
     </nav>
-
-
-    <div id="savedResultsContainer" class="hidden">
+    <button class="button" id="loadButton">Load My Awesome Images</button>
+    <button class="button hidden" id="clearButton">Clear My Awesome Images</button>
+    <div id="savedResultsContainer">
         <div class="columns">
         <div class="column is-12">
             <h1>Results:</h1>
         </div>
     </div>
-        <div id="savedResults" class="columns">
-            <div class="column is-4">
-                <figure class="image is-480x480">
-                    <img src="https://bulma.io/images/placeholders/480x480.png">
-                </figure>
-            </div>
-            <div class="column is-4">
-                <figure class="image is-480x480">
-                    <img src="https://bulma.io/images/placeholders/480x480.png">
-                </figure>
-            </div>
-            <div class="column is-4">
-                <figure class="image is-480x480">
-                    <img src="https://bulma.io/images/placeholders/480x480.png">
-                </figure>
-            </div>
+        <div id="savedResults" class="columns is-multiline">
         </div>
     </div>
-
-
-    <script src="./script.js"></script>
+    
+    <script src="./saved.js"></script>
 </body>
-
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
