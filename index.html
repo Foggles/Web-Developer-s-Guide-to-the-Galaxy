@@ -7,15 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
     <link rel="stylesheet" href="./style.css">
 
-    <title>Document</title>
+    <title>Homepage</title>
 </head>
 
 <body>
     <nav class="navbar is-black" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="">
-                <img src="" alt="LOGO" width="112" height="28">
-            </a>
 
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
                 data-target="navbarBasicExample">
@@ -39,6 +36,15 @@
         </div>
     </nav>
 
+    <div id="popup">
+        <!-- and here comes the image -->
+        <img src="./Galaxy Logo.JPG" alt="popup">
+            <!-- Now this is the button which closes the popup-->
+            <button id="close">Close button</button>
+            <!-- and finally we close the POPUP FRAME-->
+            <!-- everything on it will show up within the popup so you can add more things not just an image -->
+    </div>
+
     <!-- Slideshow container -->
     <div class="slideshow-container">
 
@@ -55,7 +61,7 @@
 
         <div id="div2" class="mySlides fade">
             <div class="numbertext">3 / 3</div>
-            <img id="img2" src="img3.jpg" style="width:100%">
+            <img id="img2" src="" style="width:100%">
         </div>
 
         <!-- Next and previous buttons -->
@@ -72,14 +78,17 @@
     </div>
 
     <div class="columns">
-        <div class="column is-12">
+        <div class="column is-3"></div>
+        <div class="column is-6">
             <div class="control">
                 <input id="searchQuery" class="input is-dark" type="text" placeholder="Search NASA Database">
             </div>
         </div>
+        <div class="column is-3"></div>
     </div>
 
     <div id="paremeters&Button" class="columns">
+        <div class="column is-3"></div>
         <div class="column is-3">
             <div id="checkboxParameters">
                 <label class="checkbox">
@@ -112,7 +121,7 @@
     <div id="genericModal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-content is-flex-wrap-wrap">
-            <p class="image is-4by3">
+            <p class="image is-1by1">
                 <img id="modalImage" src="" alt="">
             </p>
             <div class="modal-card">
