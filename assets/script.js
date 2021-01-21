@@ -7,6 +7,8 @@ let searchedResultsContainer = document.getElementById("searchedResultsContainer
 let searchedResults = document.getElementById("searchedResults");
 let carouselContainer = document.getElementById("carousel_container")
 let loadButton = document.getElementById("loadButton")
+let searchShuttle = document.getElementById("searchShuttle");
+
 // Grabbing elements from the modal
 let genericModal = document.getElementById("genericModal");
 let modalImage = document.getElementById("modalImage");
@@ -14,6 +16,7 @@ let modalCloseBtn = document.getElementById("modalCloseBtn");
 let resultInfo = document.getElementById("resultInfo");
 let saveBtn = document.getElementById("saveBtn");
 let savedImagesArray = [];
+let savedImagesDescArray = [];
 
 // Grabbing elements from saved.html
 let savedResultsContainer = document.getElementById("savedResultsContainer");
@@ -40,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Pop-up
-$(document).ready(function () {
+$(document).ready(() => {
   //select the POPUP FRAME and show it
   $("#popup").hide().fadeIn(1000);
   //close the POPUP if the button with id="close" is clicked
@@ -56,7 +59,7 @@ function apodBanner(queryUrlApod) {
   $.ajax({
     url: queryUrlApod,
     method: "GET"
-  }).then(function (response) {
+  }).then((response) => {
     console.log(response)
     // apodImage.src = response.hdurl
     for (let index = 0; index < response.length; index++) {
@@ -73,21 +76,24 @@ function apodBanner(queryUrlApod) {
     }
   })
 }
-var slideIndex = 1;
+
+let slideIndex = 1;
 showSlides(slideIndex);
 // Next/previous controls
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+  slideIndex += n;
+  showSlides(slideIndex);
 }
 // Thumbnail image controls
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+  slideIndex = n;
+  showSlides(slideIndex);
 }
 
 function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
+  let i;
+  const slides = document.getElementsByClassName("mySlides");
+  const dots = document.getElementsByClassName("dot");
   if (n > slides.length) { slideIndex = 1 }
   if (n < 1) { slideIndex = slides.length }
   for (i = 0; i < slides.length; i++) {
@@ -112,11 +118,11 @@ function createIframe(src) {
 }
 
 apodBanner(queryUrlApod);
+
 // * DONE: Search Input
 // * DONE: Grab the input of searchQuery and store in its own variable.
 // * DONE: Check what parameters have been selected (don't run search if none have been selected).
-// ? TODO: Store the results. (Don't think we need to store results, thoughts?)
-// TODO: Use a "for loop" to update the DOM with the results.
+// * DONE: Use a "for loop" to update the DOM with the results.
 let querySearch;
 let queryMediaType;
 
@@ -127,14 +133,14 @@ function searchDatabase(queryURL) {
   $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(function (response) {
-    console.log(response);
+  }).then((response) => {
+    // console.log(response);
     // Displaying the search results to the DOM
     for (let index = 0; index < response.collection.items.length; index++) {
       // Creating the new elements in memory
-      let newImageDiv = document.createElement("div");
-      let newImageFigure = document.createElement("figure");
-      let newImage = document.createElement("img");
+      const newImageFigure = document.createElement("figure");
+      const newImageDiv = document.createElement("div");
+      const newImage = document.createElement("img");
       // Adding CSS classes to the new div and figure
       newImageDiv.classList.add("column");
       newImageDiv.classList.add("is-one-third");
@@ -152,61 +158,84 @@ function searchDatabase(queryURL) {
       // Removing the hidden class from the entire container
       searchedResultsContainer.classList.remove("hidden");
     };
+
+    searchShuttle.classList.remove("fa-spin");
+    searchShuttle.style.color = "white";
   });
 };
 
 // Adding a click event listener to the search button
-searchButton.addEventListener("click", function () {
+searchButton.addEventListener("click", () => {
+
+  searchShuttle.classList.add("fa-spin");
+  searchShuttle.style.color = "red";
+
   querySearch = searchQuery.value;
   querySearch = querySearch.toLowerCase();
   let queryURL;
+  queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + "&media_type=image";
+
+  // ! Only going to search for images at the current moment
   // Changing queryMediaType depending on which parameters are checked
-  if (imageFormat.checked || audioFormat.checked) {
-    if (imageFormat.checked && audioFormat.checked) {
-      queryMediaType = "&media_type=image,audio";
-      queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
-      searchDatabase(queryURL);
-    }
-    else if (imageFormat.checked === true) {
-      queryMediaType = "&media_type=image";
-      queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
-      searchDatabase(queryURL);
-    } else if (audioFormat.checked === true) {
-      queryMediaType = "&media_type=audio";
-      queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
-      searchDatabase(queryURL);
-    }
-  } else {
-    searchQuery.setAttribute("placeholder", "Please select a format type");
-  }
+  // if (imageFormat.checked || audioFormat.checked) {
+  //   if (imageFormat.checked && audioFormat.checked) {
+  //     queryMediaType = "&media_type=image,audio";
+  //     queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
+  //     searchDatabase(queryURL);
+  //   }
+  //   else if (imageFormat.checked === true) {
+  //     queryMediaType = "&media_type=image";
+  //     queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
+  //     searchDatabase(queryURL);
+  //   } else if (audioFormat.checked === true) {
+  //     queryMediaType = "&media_type=audio";
+  //     queryURL = "https://images-api.nasa.gov/search?q=" + querySearch + queryMediaType;
+  //     searchDatabase(queryURL);
+  //   }
+  // } else {
+  //   searchQuery.setAttribute("placeholder", "Please select a format type");
+  // }
+
   searchedResults.innerHTML = "";
 });
 
 // * DONE: When the click event is triggered, a modal appears.
 // * DONE: When user clicks the close button, the modal disappears.
-// TODO: The modal will contain the image on the left & information about the image on the right.
-// TODO: There will also be a save button in the modal, allowing the user to save the image to local storage for later viewing.
+// ! TODO: The modal will contain the image on the left & information about the image on the right.
+// * DONE: There will also be a save button in the modal, allowing the user to save the image to local storage for later viewing.
 // Event listener to give data to the modal and open it
 searchedResultsContainer.addEventListener("click", function (event) {
   if (event.target.matches("img")) {
-    let imgSrc = event.target.getAttribute("src");
-    console.log(imgSrc);
+    const imgSrc = event.target.getAttribute("src");
+    // console.log(imgSrc);
     modalImage.setAttribute("src", imgSrc);
-    let imgDesc = event.target.getAttribute("description");
+    const imgDesc = event.target.getAttribute("description");
     resultInfo.textContent = imgDesc;
     genericModal.classList.add("is-active");
-    // Add event listener to save image button
-    saveBtn.addEventListener("click", function (event) {
-      // // Store data to local storage
-      savedImagesArray.push(imgSrc);
-      // console.log(savedImagesArray)
-      window.localStorage.setItem('imageData', JSON.stringify(savedImagesArray));
-    })
-  }
+
+  };
 });
+
+// Add event listener to save image button
+saveBtn.addEventListener("click", function () {
+  // Store data to local storage
+  const saveImgSrc = document.getElementById("modalImage").getAttribute("src");
+  const saveImgDesc = document.getElementById("resultInfo").textContent;
+  // console.log(saveImgSrc);
+
+  savedImagesArray.push(saveImgSrc);
+  savedImagesDescArray.push(saveImgDesc);
+
+  console.log(savedImagesArray)
+  console.log(savedImagesDescArray);
+
+  window.localStorage.setItem('imageData', JSON.stringify(savedImagesArray));
+  window.localStorage.setItem('imageDesc', JSON.stringify(savedImagesDescArray));
+
+});
+
 // Event listener to close the modal
-modalCloseBtn.addEventListener("click", function () {
-  genericModal.classList.remove("is-active");
-});
+modalCloseBtn.addEventListener("click", () => genericModal.classList.remove("is-active"));
+
 // When redirected to 'Saved Images', Retrieve local storage
 // Append images to same format as home page
