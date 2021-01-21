@@ -1,6 +1,11 @@
 let loadButton = document.getElementById("loadButton")
 let savedResults = document.getElementById("savedResults");
-let clearButton = document.getElementById("clearButton")
+let clearButton = document.getElementById("clearButton");
+let savedGenericModal = document.getElementById("savedGenericModal");
+let savedModalImage = document.getElementById("savedModalImage");
+let savedResultDesc = document.getElementById("savedResultDesc");
+// let modalClearBtn = document.getElementById("modalClearBtn");
+let savedModalCloseBtn = document.getElementById("savedModalCloseBtn");
 
 // Navbar Burger functionality
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,13 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 // Functionality to load the saved images
-loadButton.addEventListener("click", function () {
+loadButton.addEventListener("click", () => {
     // window.location.href = "./saved.html",
+    let savedImagesDescArray = JSON.parse(window.localStorage.getItem("imageDesc"));
     let savedImageArray = JSON.parse(window.localStorage.getItem("imageData"));
+
     for (let index = 0; index < savedImageArray.length; index++) {
-        let newImageDiv = document.createElement("div");
-        let newImageFigure = document.createElement("figure");
-        let newImage = document.createElement("img");
+        const newImageDiv = document.createElement("div");
+        const newImageFigure = document.createElement("figure");
+        const newImage = document.createElement("img");
         newImageDiv.classList.add("column");
         newImageDiv.classList.add("is-one-third");
         newImageFigure.classList.add("image");
@@ -38,13 +45,31 @@ loadButton.addEventListener("click", function () {
         newImageFigure.appendChild(newImage);
         newImageDiv.appendChild(newImageFigure);
         savedResults.appendChild(newImageDiv);
-    }
+
+        for (let index = 0; index < savedImagesDescArray.length; index++) {
+          newImage.setAttribute("desc", savedImagesDescArray[index]);          
+        };
+    };
     loadButton.classList.add("hidden")
     clearButton.classList.remove("hidden")
 });
 
-// Functionality to clear saved images
-clearButton.addEventListener("click", function() {
+savedResults.addEventListener("click", function (event) {
+  if (event.target.matches("img")) {
+    const savedImgSrc = event.target.getAttribute("src");
+    // console.log(imgSrc);
+    savedModalImage.setAttribute("src", savedImgSrc);
+    const imgDesc = event.target.getAttribute("desc");
+    savedResultDesc.textContent = imgDesc;
+    savedGenericModal.classList.add("is-active");
+    
+  };
+});
+
+savedModalCloseBtn.addEventListener("click", () => savedGenericModal.classList.remove("is-active"));
+
+// Functionality to clear all saved images
+clearButton.addEventListener("click", () => {
     window.localStorage.clear("imageData")
     location.reload();
     clearButton.classList.add("hidden");

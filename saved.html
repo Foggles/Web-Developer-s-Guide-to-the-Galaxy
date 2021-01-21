@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./assets/style.css">
     <title>Saved Gallery</title>
 </head>
 <body>
@@ -39,8 +39,25 @@
         <div id="savedResults" class="columns is-multiline">
         </div>
     </div>
-    
-    <script src="./saved.js"></script>
+
+    <div id="savedGenericModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content is-flex-wrap-wrap">
+            <p class="image is-1by1">
+                <img id="savedModalImage" src="" alt="">
+            </p>
+            <div class="modal-card">
+                <section id="savedResultDesc" class="modal-card-body"></section>
+                <!-- <div id="modalClearBtn" class="button">Clear Image from Saved Gallery</div> -->
+            </div>
+        </div>
+        <button id="savedModalCloseBtn" class="modal-close is-large" aria-label="close"></button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="./assets/saved.js"></script>
 </body>
 </html>
 

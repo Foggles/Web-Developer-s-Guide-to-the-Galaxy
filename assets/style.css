@@ -1,5 +1,11 @@
+html {
+  background-image: url(./starry_background.jpg);
+}
+
 body {
-  background-color: gray;
+  background-image: url(./starry_background.jpg);
+  background-color: black;
+  color: white;
 }
 
 .hidden {
@@ -11,14 +17,37 @@ body {
 
 }
 
+.modal {
+  overflow-x: hidden;
+}
+
+#resultInfo {
+  color: black;
+}
+
+#savedResultDesc {
+  color: black;
+}
+
+.checkbox {
+  background-color: black;
+}
+
 #popup {
 display:none;
-position:absolute;
-margin:0 auto;
+position: absolute;
+margin: auto;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 z-index: 9999;
+background-color: black;
+}
+
+#popup>#close {
+  position: absolute;
+  top: 2%;
+  right: 1%;
 }
 
 * {box-sizing:border-box}
@@ -28,6 +57,9 @@ z-index: 9999;
 max-width: 1000px;
 position: relative;
 margin: auto;
+border-style: solid;
+border-width: 1px;
+border-color: white;
 }
 
 
