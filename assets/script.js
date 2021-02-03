@@ -197,6 +197,7 @@ searchButton.addEventListener("click", () => {
   // }
 
   searchedResults.innerHTML = "";
+  searchDatabase(queryURL);
 });
 
 // * DONE: When the click event is triggered, a modal appears.
